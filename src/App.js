@@ -1,25 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import todos from "./todos.json";
 
-function App() {
+export default function App() {
+  const prenom = "Islem";
+  const nom = "KERBADOU";
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Bienvenue {prenom} {nom}</h1>
+      <h2>Liste des tâches : </h2>
+      <ul>
+        {todos.taches.map((tache) => (
+          <li key={tache.id}>
+            {tache.nom} {tache.fait ? "✅" : "❌"}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
-
-export default App;
