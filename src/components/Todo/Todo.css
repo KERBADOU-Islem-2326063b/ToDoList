@@ -1,0 +1,28 @@
+main {
+    text-align: center;
+}
+
+ul {
+    padding: 0px;
+}
+
+.todo-item {
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin: 5px;
+    cursor: pointer;
+}
+
+.todo-item.urgent {
+    background-color: #7f0000;
+    color: white;
+}
+
+.todo-item .task-details {
+    font-size: 0.9em;
+    color: #666;
+}
+
+.strikethrough {
+    text-decoration: line-through;
+}

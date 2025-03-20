@@ -1,0 +1,53 @@
+{
+    "taches": [
+        {
+            "id": 101,
+            "title": "1. Fonctionnalités",
+            "description": "",
+            "date_creation": "01/01/2025",
+            "date_echeance": "20/03/2025",
+            "etat": "Reussi",
+            "urgent": false
+        },
+        {
+            "id": 102,
+            "title": "2. Etude de marché",
+            "description": "",
+            "date_creation": "01/01/2025",
+            "date_echeance": "01/04/2025",
+            "etat": "En attente",
+            "urgent": false
+        },
+        {
+            "id": 103,
+            "title": "3. Wireframes",
+            "description": "",
+            "date_creation": "01/01/2025",
+            "date_echeance": "01/04/2025",
+            "etat": "Nouveau",
+            "urgent": true
+        }
+    ],
+    "categories": [
+        {
+            "id": 201,
+            "title": "Marketing",
+            "color": "orange",
+            "icon": "",
+            "actif": true
+        },
+        {
+            "id": 202,
+            "title": "Ancien",
+            "color": "blue",
+            "icon": "",
+            "actif": false
+        }
+    ],
+    "relations": [
+        {
+            "tache": 102,
+            "categorie": 201
+        }
+    ]
+}

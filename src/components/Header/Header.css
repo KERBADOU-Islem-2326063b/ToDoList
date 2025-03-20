@@ -1,0 +1,25 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    border-bottom: 1px solid #ccc;
+    gap: 25px;
+  }
+  
+.header-left {
+    font-weight: bold;
+}
+
+.header-right ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 10px;
+}
+
+.header-right li {
+    font-size: 0.95rem;
+}
+  

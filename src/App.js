@@ -1,21 +1,19 @@
 import "./App.css";
-import todos from "./todos.json";
+import Header from "./components/Header/Header"
+import Footer from "./components/Footer/Footer"
+import Todo from "./components/Todo/Todo"
+import todosList from "./data/todos.json";
+import { useState } from "react";
 
 export default function App() {
-  const prenom = "Islem";
-  const nom = "KERBADOU";
+  const [currentTodos, setCurrentTodos] = useState(todosList);
+  const todos = currentTodos.taches; 
 
   return (
     <div className="App">
-      <h1>Bienvenue {prenom} {nom}</h1>
-      <h2>Liste des tâches : </h2>
-      <ul>
-        {todos.taches.map((tache) => (
-          <li key={tache.id}>
-            {tache.nom} {tache.fait ? "✅" : "❌"}
-          </li>
-        ))}
-      </ul>
+      <Header todos={todos}/>
+      <Todo todos={todos} setTodos={setCurrentTodos} />
+      <Footer setCurrentTodos={setCurrentTodos}/>
     </div>
   );
 }
