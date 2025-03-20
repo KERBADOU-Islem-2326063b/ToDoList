@@ -1,10 +1,10 @@
 .header {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
     border-bottom: 1px solid #ccc;
-    gap: 25px;
   }
   
 .header-left {

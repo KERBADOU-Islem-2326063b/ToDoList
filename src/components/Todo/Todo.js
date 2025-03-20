@@ -1,7 +1,9 @@
 import "./Todo.css";
 import React from "react";
+import { useTodos } from "../Context/TodosContext";
 
-function Todo({ todos = [], setTodos }) {
+function Todo() {
+  const { todos, setTodos } = useTodos();
   const [filter, setFilter] = React.useState("All");
 
   return (
@@ -12,7 +14,7 @@ function Todo({ todos = [], setTodos }) {
         {todos.map((tache) => (
           <li
             key={tache.id}
-            className={`todo-item ${tache.etat.toLowerCase()} ${tache.urgent ? 'urgent' : ''}`}
+            className={`todo-item ${tache.etat.toLowerCase().replace(/ /g, '')} ${tache.urgent ? 'urgent' : ''}`}
           >
             <strong className={tache.etat === "Reussi" ? "strikethrough" : ""}>{tache.title}</strong>  ({tache.etat})
 

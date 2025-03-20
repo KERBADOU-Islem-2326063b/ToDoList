@@ -7,20 +7,33 @@ ul {
 }
 
 .todo-item {
-    padding: 10px;
+    padding: 30px;
     border: 1px solid #ccc;
+    border-radius: 10%;
     margin: 5px;
     cursor: pointer;
 }
 
+.todo-item.reussi {
+    background-color: green
+}
+
+.todo-item.enattente {
+    background-color: #FFBF00;
+}
+
+.todo-item.nouveau {
+    background-color: lightblue;
+}
+
 .todo-item.urgent {
-    background-color: #7f0000;
+    border-color: #7f0000;
+    border-width: 5px;
     color: white;
 }
 
 .todo-item .task-details {
     font-size: 0.9em;
-    color: #666;
 }
 
 .strikethrough {
