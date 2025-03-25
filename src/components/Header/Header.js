@@ -15,8 +15,6 @@ function Header() {
   const newCount = taches.filter(t => t.etat === ETATS.NOUVEAU.name).length;
   const waitingCount = taches.filter(t => t.etat === ETATS.EN_ATTENTE.name).length;
 
-  console.log(doneCount);
-
   const data = [
     { name: ETATS.NOUVEAU.name.toLowerCase(), value: newCount },
     { name: ETATS.EN_COURS.name.toLowerCase(), value: totalCount - newCount - doneCount - waitingCount },
