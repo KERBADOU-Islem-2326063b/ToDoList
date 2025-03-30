@@ -45,10 +45,6 @@ const TodoList = () => {
     }
   };
 
-  const handleRemoveFromCategory = (tacheId) => {
-    setRelations(relations.filter((relation) => relation.tache !== tacheId));
-  };
-
   const handleDateChange = (tacheId, newDate) => {
     const [year, month, day] = newDate.split("-");
     const formattedDate = `${day}/${month}/${year}`;
@@ -76,7 +72,6 @@ const TodoList = () => {
 
   return (
     <main>
-      <h2>Liste des tâches</h2>
 
       <div className="controls">
         <div className="filters">
@@ -106,6 +101,8 @@ const TodoList = () => {
         </button>
       </div>
 
+      <h2>Liste des tâches</h2>
+
       {viewMode === "Tache" ? (
         <ul>
           {sortedTodos.map((tache) => {
@@ -125,20 +122,19 @@ const TodoList = () => {
                     Urgent:
                     <input type="checkbox" checked={tache.urgent} onChange={() => handleUrgentChange(tache.id)} />
                   </label>
-                  <button className="expand-btn" onClick={() => toggleTodoExpand(tache.id)}>
+                  <button className="action-btn expand-btn" onClick={() => toggleTodoExpand(tache.id)}>
                     {expandedTodoId === tache.id ? "▲" : "▼"}
                   </button>
-                  <button className="delete-btn" onClick={() => handleDeleteTodo(tache.id)}>🗑️</button>
+                  <button className="action-btn delete-btn" onClick={() => handleDeleteTodo(tache.id)}>🗑️</button>
                 </div>
               </div>
               <div className="todo-item-details">
-                <p>Date d'échéance: 
-                  <input 
+                <p>Date d'échéance: </p>
+                <input 
                     type="date" 
                     value={tache.date_echeance.split("/").reverse().join("-")} 
                     onChange={(e) => handleDateChange(tache.id, e.target.value)} 
                   />
-                </p>
                 {expandedTodoId === tache.id && (
                   <div className="task-details">
                     <p>{tache.description || "Aucune description disponible"}</p>
@@ -146,7 +142,7 @@ const TodoList = () => {
                   </div>
                 )}
               </div>
-              <label>Assigner à une catégorie:</label>
+              <p>Assigner à une catégorie:</p>
               <div className="category-actions">
               <select onChange={(e) => handleCategoryChange(tache.id, Number(e.target.value))} value={relatedCategory?.categorie || ""}>
                 <option value="">Aucune</option>
@@ -154,7 +150,6 @@ const TodoList = () => {
                   <option key={category.id} value={category.id}>{category.title}</option>
                 ))}
               </select>
-              {relatedCategory && <button onClick={() => handleRemoveFromCategory(tache.id)}>Retirer</button>}
             </div>
             </li>
             )
@@ -164,63 +159,61 @@ const TodoList = () => {
         <ul className="category-list">
           {filteredAndSortedCategories.length > 0 ? (
             filteredAndSortedCategories.map(({ category, sortedRelatedTodos }) => (
-              <li key={category.id}>
-                <strong>{category.title}</strong>
-                <button className="delete-btn" onClick={() => handleDeleteCategory(category.id)}>🗑️</button>
-
+              <li key={category.id} style={{ backgroundColor: category.color || "#e0e0e0" }}>
+              <strong>{category.title}</strong>
+              <button className="action-btn delete-btn" onClick={() => handleDeleteCategory(category.id)}>🗑️</button>
+            
+              <div className="task-container">
                 {sortedRelatedTodos.length > 0 ? (
-                  <ul>
-                    {sortedRelatedTodos.map((tache) => (
-                      <li
-                        key={tache.id}
-                        className={`todo-item ${tache.etat.toLowerCase().replace(/ /g, '')} ${tache.urgent ? 'urgent' : ''}`}
-                      >
-                         <div className="todo-item-header">
-                            <strong className={ETAT_TERMINE.some(etat => etat.name === tache.etat) ? "strikethrough" : ""}>{tache.title}</strong>
-                            <div className="todo-item-actions">
-                              <select
-                                value={tache.etat}
-                                onChange={(e) => handleEtatChange(tache.id, e.target.value)}
-                              >
-                                {Object.values(ETATS).map((etat) => (
-                                  <option key={etat.name} value={etat.name}>{etat.name}</option>
-                                ))}
-                              </select>
-                              <label>
-                                Urgent:
-                                <input
-                                  type="checkbox"
-                                  checked={tache.urgent}
-                                  onChange={() => handleUrgentChange(tache.id)}
-                                />
-                              </label>
-                              <button className="expand-btn" onClick={() => toggleTodoExpand(tache.id)}>
-                                {expandedTodoId === tache.id ? '▲' : '▼'}
-                              </button>
-                            </div>
+                   sortedRelatedTodos.map((tache) => (
+                    <div
+                      key={tache.id}
+                      className={`todo-item ${
+                        tache.etat.toLowerCase().replace(/ /g, "")
+                      } ${tache.urgent ? "urgent" : ""}`}
+                    >
+                      <div className="todo-item-header">
+                        <strong
+                          className={
+                            ETAT_TERMINE.some((etat) => etat.name === tache.etat)
+                              ? "strikethrough"
+                              : ""
+                          }
+                        >
+                          {tache.title}
+                        </strong>
+                        <div className="todo-item-actions">
+                          <button
+                            className="action-btn expand-btn"
+                            onClick={() => toggleTodoExpand(tache.id)}
+                          >
+                            {expandedTodoId === tache.id ? "▲" : "▼"}
+                          </button>
+                          <button
+                            className="action-btn delete-btn"
+                            onClick={() => handleDeleteTodo(tache.id)}
+                          >
+                            🗑️
+                          </button>
+                        </div>
+                      </div>
+                      <div className="todo-item-details">
+                        <p>Date d'échéance: {tache.date_echeance}</p>
+                        {expandedTodoId === tache.id && (
+                          <div className="task-details">
+                            <p>{tache.description || "Aucune description"}</p>
+                            <p>Date de création: {tache.date_creation}</p>
                           </div>
-                          <div className="todo-item-details">
-                            <p>Date d'échéance: 
-                              <input 
-                                type="date" 
-                                value={tache.date_echeance.split("/").reverse().join("-")} 
-                                onChange={(e) => handleDateChange(tache.id, e.target.value)} 
-                              />
-                            </p>
-                            {expandedTodoId === tache.id && (
-                              <div className="task-details">
-                                <p>{tache.description || "Aucune description disponible"}</p>
-                                <p>Date de création: {tache.date_creation}</p>
-                              </div>
-                            )}
-                          </div>
-                      </li>
-                    ))}
-                  </ul>
+                        )}
+                      </div>
+                    </div>
+                  ))
                 ) : (
-                  <p>Aucune tâche liée à cette catégorie</p>
+                  <p>Aucune tâche.</p>
                 )}
-              </li>
+              </div>
+            </li>
+            
             ))
           ) : (
             <p>Aucune catégorie disponible.</p>
