@@ -1,0 +1,85 @@
+{
+    "taches": [
+      {
+        "id": 104,
+        "title": "Développement de l'interface utilisateur",
+        "description": "Créer l'interface utilisateur principale de l'application.",
+        "date_creation": "15/02/2025",
+        "date_echeance": "30/04/2025",
+        "etat": "En cours",
+        "urgent": true
+      },
+      {
+        "id": 105,
+        "title": "Tests unitaires",
+        "description": "Effectuer des tests unitaires sur les composants principaux.",
+        "date_creation": "01/03/2025",
+        "date_echeance": "15/05/2025",
+        "etat": "Nouveau",
+        "urgent": false
+      },
+      {
+        "id": 106,
+        "title": "Intégration de l'API",
+        "description": "Intégrer l'API backend pour récupérer et enregistrer les données.",
+        "date_creation": "10/03/2025",
+        "date_echeance": "20/05/2025",
+        "etat": "En attente",
+        "urgent": true
+      },
+      {
+        "id": 107,
+        "title": "Rédaction de la documentation",
+        "description": "Rédiger la documentation utilisateur et développeur.",
+        "date_creation": "01/04/2025",
+        "date_echeance": "30/06/2025",
+        "etat": "Nouveau",
+        "urgent": false
+      }
+    ],
+    "categories": [
+      {
+        "id": 203,
+        "title": "Développement",
+        "color": "green",
+        "icon": "code",
+        "actif": true
+      },
+      {
+        "id": 204,
+        "title": "Design",
+        "color": "purple",
+        "icon": "palette",
+        "actif": true
+      },
+      {
+        "id": 205,
+        "title": "Administration",
+        "color": "gray",
+        "icon": "settings",
+        "actif": false
+      }
+    ],
+    "relations": [
+      {
+        "tache": 104,
+        "categorie": 203
+      },
+      {
+        "tache": 104,
+        "categorie": 204
+      },
+      {
+        "tache": 105,
+        "categorie": 203
+      },
+      {
+        "tache": 106,
+        "categorie": 203
+      },
+      {
+        "tache": 107,
+        "categorie": 205
+      }
+    ]
+  }
