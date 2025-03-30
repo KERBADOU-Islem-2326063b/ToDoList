@@ -221,6 +221,7 @@ select:focus {
 
 .category-list {
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
   gap: 25px;
   justify-content: center;
@@ -230,7 +231,6 @@ select:focus {
   padding: 20px;
   border-radius: 15px;
   box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.1);
-  width: 380px;
   min-height: 240px; 
   background: var(--category-color, #e0e0e0);
   transition: transform 0.2s, box-shadow 0.2s;
@@ -282,17 +282,4 @@ select:focus {
 .category-list .todo-item-details {
   font-size: 0.9em;
   color: #666;
-}
-
-.task-container::-webkit-scrollbar {
-  width: 8px;
-}
-
-.task-container::-webkit-scrollbar-thumb {
-  background: #ccc;
-  border-radius: 4px;
-}
-
-.task-container::-webkit-scrollbar-track {
-  background: transparent;
 }
