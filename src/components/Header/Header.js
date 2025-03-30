@@ -2,25 +2,26 @@ import React from "react";
 import { PieChart, Pie, Cell, Tooltip, Legend } from 'recharts';
 import "./Header.css";
 import { useTodos } from "../Context/TodosContext";
-import { ETATS, ETAT_TERMINE } from "../Enums/Etats";
+import { ETATS } from "../Enums/Etats";
 
 function Header() {
   const { todos } = useTodos();
-  const taches = todos;
-  const totalCount = taches.length;
+  const totalCount = todos.length;
 
-  const doneCount = taches.filter(t => t.etat === ETATS.REUSSI.name).length;
+  const doneCount = todos.filter(t => t.etat === ETATS.REUSSI.name).length;
+  const newCount = todos.filter(t => t.etat === ETATS.NOUVEAU.name).length;
+  const waitingCount = todos.filter(t => t.etat === ETATS.EN_ATTENTE.name).length;
+  const inProgressCount = todos.filter(t => t.etat === ETATS.EN_COURS.name).length;
+  const abandonedCount = todos.filter(t => t.etat === ETATS.ABANDONNE.name).length;
+
   const unfinishedCount = totalCount - doneCount;
-
-  const newCount = taches.filter(t => t.etat === ETATS.NOUVEAU.name).length;
-  const waitingCount = taches.filter(t => t.etat === ETATS.EN_ATTENTE.name).length;
 
   const data = [
     { name: ETATS.NOUVEAU.name.toLowerCase(), value: newCount },
-    { name: ETATS.EN_COURS.name.toLowerCase(), value: totalCount - newCount - doneCount - waitingCount },
+    { name: ETATS.EN_COURS.name.toLowerCase(), value: inProgressCount },
     { name: ETATS.REUSSI.name.toLowerCase(), value: doneCount },
     { name: ETATS.EN_ATTENTE.name.toLowerCase(), value: waitingCount },
-    { name: ETATS.ABANDONNE.name.toLowerCase(), value: totalCount - newCount - doneCount - waitingCount }
+    { name: ETATS.ABANDONNE.name.toLowerCase(), value: abandonedCount }
   ];
 
   return (
@@ -31,7 +32,7 @@ function Header() {
       <div className="header-right">
         <PieChart width={220} height={220}>
           <Pie data={data} dataKey="value" outerRadius={80}>
-           {data.map((entry, index) => {
+            {data.map((entry, index) => {
               const state = Object.values(ETATS).find(state => state.name.toLowerCase() === entry.name);
               return state ? <Cell key={`cell-${index}`} fill={state.color} /> : null;
             })}
